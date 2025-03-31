@@ -45,6 +45,7 @@ export const generateId = () => {
 }
 
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formateError = (err: any) => {
   if (err.name === 'ZodError') {
     const fieldErrors = Object.keys(err.errors).map((field) => {
