@@ -16,14 +16,19 @@ import { redirect, useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import ProductPrice from '@/components/shared/product/product-price'
 import { approvePayPalOrder, createPayPalOrder } from '@/lib/actions/order-action'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import StripeForm from './stripe-form'
 
 export default function PaymentForm({
   order,
   paypalClientId,
+  clientSecret
 }: {
   order: IOrder
   paypalClientId: string
   isAdmin: boolean
+  clientSecret: string | null
 }) {
   const router = useRouter()
   const { shippingAddress, items, itemsPrice, taxPrice, shippingPrice, totalPrice, paymentMethod, expectedDeliveryDate, isPaid } = order
@@ -120,6 +125,22 @@ export default function PaymentForm({
               </div>
             )}
 
+
+            {!isPaid && paymentMethod === 'Stripe' && clientSecret && (
+              <Elements
+                options={{
+                  clientSecret,
+                }}
+                stripe={stripePromise}
+              >
+                <StripeForm
+                  priceInCents={Math.round(order.totalPrice * 100)}
+                  orderId={order._id}
+                />
+              </Elements>
+            )}
+
+
             {!isPaid && paymentMethod === 'Cash On Delivery' && (
               <Button
                 className='w-full rounded-full'
@@ -133,6 +154,10 @@ export default function PaymentForm({
       </CardContent>
     </Card>
   )
+
+
+  const stripePromise = loadStripe(process.env.NEXT_STRIPE_PUBLIC_KEY as string)
+
 
   return (
     <main className='max-w-6xl mx-auto'>
