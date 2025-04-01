@@ -69,8 +69,11 @@ export default function PaymentForm({
       variant: res.success ? 'default' : 'destructive',
     })
   }
+  console.log('tsting---', isPaid, paymentMethod, clientSecret)
 
   const CheckoutSummary = () => (
+
+
     <Card>
       <CardContent className='p-4'>
         <div>
@@ -156,7 +159,9 @@ export default function PaymentForm({
   )
 
 
-  const stripePromise = loadStripe(process.env.NEXT_STRIPE_PUBLIC_KEY as string)
+  const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+  )
 
 
   return (

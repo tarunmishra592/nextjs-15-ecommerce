@@ -36,6 +36,7 @@ const CheckoutPaymentPage = async (props: {
     clientSecret = paymentIntent.client_secret
   }
 
+
   return (
     <PaymentForm
       order={order}
