@@ -1,14 +1,13 @@
-import { LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import {LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { FormEvent, useState } from 'react'
-
 import { Button } from '@/components/ui/button'
 import ProductPrice from '@/components/shared/product/product-price'
 import { SERVER_URL } from '@/lib/constant'
   
-export default function StripeForm({ priceInCents, orderId}: {
+  export default function StripeForm({ priceInCents, orderId }: {
     priceInCents: number
     orderId: string
-}) {
+  }) {
     const stripe = useStripe()
     const elements = useElements()
     const [isLoading, setIsLoading] = useState(false)

@@ -1,10 +1,6 @@
 'use client'
 
-import {
-  PayPalButtons,
-  PayPalScriptProvider,
-  usePayPalScriptReducer,
-} from '@paypal/react-paypal-js'
+import {PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import { Card, CardContent } from '@/components/ui/card'
 import { useToast } from '@/hooks/use-toast'
 
@@ -16,9 +12,12 @@ import { redirect, useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import ProductPrice from '@/components/shared/product/product-price'
 import { approvePayPalOrder, createPayPalOrder } from '@/lib/actions/order-action'
-import { loadStripe } from '@stripe/stripe-js'
-import { Elements } from '@stripe/react-stripe-js'
+import {loadStripe} from '@stripe/stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
 import StripeForm from './stripe-form'
+
+
+
 
 export default function PaymentForm({
   order,
@@ -69,11 +68,9 @@ export default function PaymentForm({
       variant: res.success ? 'default' : 'destructive',
     })
   }
-  console.log('tsting---', isPaid, paymentMethod, clientSecret)
+
 
   const CheckoutSummary = () => (
-
-
     <Card>
       <CardContent className='p-4'>
         <div>
@@ -120,35 +117,21 @@ export default function PaymentForm({
               <div>
                 <PayPalScriptProvider options={{ clientId: paypalClientId }}>
                   <PrintLoadingState />
-                  <PayPalButtons
-                    createOrder={handleCreatePayPalOrder}
-                    onApprove={handleApprovePayPalOrder}
-                  />
+                  <PayPalButtons createOrder={handleCreatePayPalOrder} onApprove={handleApprovePayPalOrder}/>
                 </PayPalScriptProvider>
               </div>
             )}
 
 
             {!isPaid && paymentMethod === 'Stripe' && clientSecret && (
-              <Elements
-                options={{
-                  clientSecret,
-                }}
-                stripe={stripePromise}
-              >
-                <StripeForm
-                  priceInCents={Math.round(order.totalPrice * 100)}
-                  orderId={order._id}
-                />
+              <Elements stripe={stripePromise} options={{clientSecret}} >
+                <StripeForm priceInCents={Math.round(order.totalPrice * 100)} orderId={order._id}/>
               </Elements>
             )}
 
 
             {!isPaid && paymentMethod === 'Cash On Delivery' && (
-              <Button
-                className='w-full rounded-full'
-                onClick={() => router.push(`/account/orders/${order._id}`)}
-              >
+              <Button className='w-full rounded-full' onClick={() => router.push(`/account/orders/${order._id}`)}>
                 View Order
               </Button>
             )}
@@ -158,12 +141,9 @@ export default function PaymentForm({
     </Card>
   )
 
+  const stripePromise = loadStripe(process.env.NEXT_STRIPE_PUBLIC_KEY as string)
 
-  const stripePromise = loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
-  )
-
-
+  
   return (
     <main className='max-w-6xl mx-auto'>
       <div className='grid md:grid-cols-4 gap-6'>
