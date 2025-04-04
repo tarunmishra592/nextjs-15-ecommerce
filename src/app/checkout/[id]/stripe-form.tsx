@@ -1,4 +1,4 @@
-import {LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import {CardElement, LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { FormEvent, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import ProductPrice from '@/components/shared/product/product-price'
@@ -41,7 +41,7 @@ import { SERVER_URL } from '@/lib/constant'
       <form onSubmit={handleSubmit} className='space-y-4'>
         <div className='text-xl'>Stripe Checkout</div>
         {errorMessage && <div className='text-destructive'>{errorMessage}</div>}
-        <PaymentElement />
+        <CardElement />
         <div>
           <LinkAuthenticationElement onChange={(e) => setEmail(e.value.email)} />
         </div>

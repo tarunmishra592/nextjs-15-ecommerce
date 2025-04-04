@@ -123,7 +123,7 @@ export default function PaymentForm({
             )}
 
 
-            {!isPaid && paymentMethod === 'Stripe' && clientSecret && (
+            {!isPaid && paymentMethod === 'Stripe' && clientSecret?.trim() && (
               <Elements stripe={stripePromise} options={{clientSecret}} >
                 <StripeForm priceInCents={Math.round(order.totalPrice * 100)} orderId={order._id}/>
               </Elements>
