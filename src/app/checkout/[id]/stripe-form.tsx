@@ -2,6 +2,7 @@ import {LinkAuthenticationElement, PaymentElement, useElements, useStripe } from
 import { FormEvent, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import ProductPrice from '@/components/shared/product/product-price'
+import { SERVER_URL } from '@/lib/constant'
   
   export default function StripeForm({ priceInCents, orderId }: {
     priceInCents: number
@@ -23,7 +24,7 @@ import ProductPrice from '@/components/shared/product/product-price'
         .confirmPayment({
           elements,
           confirmParams: {
-            return_url: `${process.env.NEXT_SERVER_URL}/checkout/${orderId}/stripe-payment-success`,
+            return_url: `${SERVER_URL}/checkout/${orderId}/stripe-payment-success`,
           },
         })
         .then(({ error }) => {
