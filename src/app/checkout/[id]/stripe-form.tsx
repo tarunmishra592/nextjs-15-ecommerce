@@ -24,7 +24,7 @@ import { SERVER_URL } from '@/lib/constant'
         .confirmPayment({
           elements,
           confirmParams: {
-            return_url: `${SERVER_URL}/checkout/${orderId}/stripe-payment-success`,
+            return_url: `${process.env.SERVER_URL}/checkout/${orderId}/stripe-payment-success`,
           },
         })
         .then(({ error }) => {
