@@ -5,7 +5,7 @@ import Stripe from 'stripe'
 import { Button } from '@/components/ui/button'
 import { getOrderById } from '@/lib/actions/order-action'
 
-const stripe = new Stripe('whsec_VhIUxcDxcKOTchRIYg3ZU9dtkvGD0w9F')
+const stripe = new Stripe('whsec_iJCe4cWMjqNIGEeaCVDPhDajmPlS30cj')
 
 export default async function StripePaymentSuccess(props: {params: Promise<{id: string}>
   searchParams: Promise<{ payment_intent: string }>
