@@ -4,7 +4,6 @@ import Stripe from 'stripe'
 
 import { Button } from '@/components/ui/button'
 import { getOrderById } from '@/lib/actions/order-action'
-import { STRIPE_WEBHOOK_SECRET } from '@/lib/constant'
 
 const stripe = new Stripe('whsec_VhIUxcDxcKOTchRIYg3ZU9dtkvGD0w9F')
 
