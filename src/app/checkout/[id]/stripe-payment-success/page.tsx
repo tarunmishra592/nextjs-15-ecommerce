@@ -4,8 +4,9 @@ import Stripe from 'stripe'
 
 import { Button } from '@/components/ui/button'
 import { getOrderById } from '@/lib/actions/order-action'
+import { STRIPE_WEBHOOK_SECRET } from '@/lib/constant'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
+const stripe = new Stripe(STRIPE_WEBHOOK_SECRET)
 
 export default async function StripePaymentSuccess(props: {params: Promise<{id: string}>
   searchParams: Promise<{ payment_intent: string }>

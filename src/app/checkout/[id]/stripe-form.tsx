@@ -1,4 +1,4 @@
-import {CardElement, LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import {LinkAuthenticationElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { FormEvent, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import ProductPrice from '@/components/shared/product/product-price'
@@ -37,11 +37,15 @@ import { SERVER_URL } from '@/lib/constant'
         .finally(() => setIsLoading(false))
     }
   
+    if (!stripe || !elements) {
+        return <div>Loading...</div>;
+    }
+      
     return (
       <form onSubmit={handleSubmit} className='space-y-4'>
         <div className='text-xl'>Stripe Checkout</div>
         {errorMessage && <div className='text-destructive'>{errorMessage}</div>}
-        <CardElement />
+        <PaymentElement />
         <div>
           <LinkAuthenticationElement onChange={(e) => setEmail(e.value.email)} />
         </div>

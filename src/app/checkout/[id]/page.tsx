@@ -3,6 +3,7 @@ import { auth } from '@/auth'
 import PaymentForm from './payment-form'
 import { getOrderById } from '@/lib/actions/order-action'
 import Stripe from 'stripe'
+import { STRIPE_SECRET_KEY } from '@/lib/constant'
 
 export const metadata = {
   title: 'Payment',
@@ -25,7 +26,7 @@ const CheckoutPaymentPage = async (props: {
 
   let clientSecret = null;
   if (order.paymentMethod === 'Stripe' && !order.isPaid) {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
+    const stripe = new Stripe(STRIPE_SECRET_KEY as string)
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(order.totalPrice * 100),
       currency: 'USD',

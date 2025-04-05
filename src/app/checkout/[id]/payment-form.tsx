@@ -15,6 +15,8 @@ import { approvePayPalOrder, createPayPalOrder } from '@/lib/actions/order-actio
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import StripeForm from './stripe-form'
+import { useEffect } from 'react'
+import { STRIPE_PUBLIC_KEY } from '@/lib/constant'
 
 
 
@@ -36,6 +38,21 @@ export default function PaymentForm({
   if (isPaid) {
     redirect(`/account/orders/${order._id}`)
   }
+
+
+  const loadStripeScript = () => {
+    const script = document.createElement('script');
+    script.src = `https://js.stripe.com/v3/`;
+    script.async = true;
+    script.onload = () => {
+      // Initialize Stripe here if needed
+    };
+    document.body.appendChild(script);
+  };
+  
+  useEffect(() => {
+    loadStripeScript();
+  }, []);
 
 
   function PrintLoadingState() {
@@ -141,7 +158,7 @@ export default function PaymentForm({
     </Card>
   )
 
-  const stripePromise = loadStripe(process.env.NEXT_STRIPE_PUBLIC_KEY as string)
+  const stripePromise = loadStripe(STRIPE_PUBLIC_KEY as string)
 
   
   return (
