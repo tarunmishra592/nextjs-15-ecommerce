@@ -2,7 +2,6 @@ import {LinkAuthenticationElement, PaymentElement, useElements, useStripe } from
 import { FormEvent, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import ProductPrice from '@/components/shared/product/product-price'
-import { SERVER_URL } from '@/lib/constant'
   
   export default function StripeForm({ priceInCents, orderId }: {
     priceInCents: number
