@@ -3,9 +3,9 @@ import Stripe from 'stripe'
 
 import Order from '@/lib/db/models/order.model'
 import { sendPurchaseReceipt } from '../../../../../emails'
-import { STRIPE_WEBHOOK_SECRET } from '@/lib/constant'
+import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET } from '@/lib/constant'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
+const stripe = new Stripe(STRIPE_SECRET_KEY as string)
 
 export async function POST(req: NextRequest) {
   const event = await stripe.webhooks.constructEvent(
