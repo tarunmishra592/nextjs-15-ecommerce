@@ -13,13 +13,15 @@ export async function POST(req: NextRequest) {
     req.headers.get('stripe-signature') as string,
     STRIPE_WEBHOOK_SECRET as string
   )
-
+  console.log('event type', event)
   if (event.type === 'charge.succeeded') {
     const charge = event.data.object
     const orderId = charge.metadata.orderId
     const email = charge.billing_details.email
     const pricePaidInCents = charge.amount
     const order = await Order.findById(orderId).populate('user', 'email')
+  console.log('event order', order)
+
     if (order == null) {
       return new NextResponse('Bad Request', { status: 400 })
     }
