@@ -20,7 +20,7 @@ export async function getProductForCard({tag, limit=4}:{
         { tags:{ $in:[tag] }, isPublished: true },
         {
             name: 1,
-            href:{ $concat: ['/products/', '$slug'] },
+            href:{ $concat: ['/product/', '$slug'] },
             image:{ $arrayElemAt:['$images', 0] }
         }
     ).sort({createdAt: 'desc'}).limit(limit)
