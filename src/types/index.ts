@@ -1,4 +1,4 @@
-import { CartSchema, OrderFieldSchema, OrderInputSchema, ProductFieldSchema, ShippingAddressSchema, UserFieldSchema, UserSignInSchema, UserSignUpSchema } from '@/lib/validator'
+import { CartSchema, OrderFieldSchema, OrderInputSchema, ProductFieldSchema, ReviewFieldSchema, ShippingAddressSchema, UserFieldSchema, UserNameSchema, UserSignInSchema, UserSignUpSchema } from '@/lib/validator'
 import {z} from 'zod'
 
 export type IProductField = z.infer<typeof ProductFieldSchema>
@@ -15,10 +15,26 @@ export type ShippingAddress = z.infer<typeof ShippingAddressSchema>
 
 export type IOrderInput = z.infer<typeof OrderInputSchema>
 
+export type IReviewInput = z.infer<typeof ReviewFieldSchema>
+
+export type IUserName = z.infer<typeof UserNameSchema>
+
+export type IReviewDetails = IReviewInput & {
+  _id: string
+  createdAt: string
+  user: {
+    name:string
+  }
+}
 
 export type Data = {
     users: IUserField[]
     products: IProductField[],
+    reviews: {
+        title: string,
+        rating: number,
+        comment: string
+    }[],
     headerMenu:{
         name: string,
         href: string

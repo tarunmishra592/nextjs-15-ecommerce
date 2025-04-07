@@ -3,10 +3,13 @@ import Link from "next/link";
 import Menu from "./menu";
 import Search from "./search";
 import { menu } from "@/lib/menu";
-import { Button } from "@/components/ui/button";
-import { MenuIcon } from "lucide-react";
+import Sidebar from "./sidebar";
+import { getAllCategory } from "@/lib/actions/product.actions";
 
-export default function Header(){
+export default async function Header(){
+
+    const allCategories = await getAllCategory()
+
     return(
         <header className='bg-gray-900  text-white'>
             <div className='px-2'>
@@ -35,10 +38,11 @@ export default function Header(){
                 </div>
             </div>
             <div className='flex items-center px-3 mb-[1px]  bg-orange-800'>
-                <Button variant="ghost" className="dark header-action flex item-center gap-1 text-base [&_svg]:size-6">
+                {/* <Button variant="ghost" className="dark header-action flex item-center gap-1 text-base [&_svg]:size-6">
                     <MenuIcon/>
                     All
-                </Button>
+                </Button> */}
+                <Sidebar categories={allCategories} />
                 <div className='flex items-center flex-wrap gap-3 overflow-hidden   max-h-[42px]'>
                 {menu.map((menu) => (
                     <Link

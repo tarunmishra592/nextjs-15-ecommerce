@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
     req.headers.get('stripe-signature') as string,
     STRIPE_WEBHOOK_SECRET as string
   )
+  console.log('event ------------------------------------------------------->>>>>>>')
   console.log('event type', event)
   if (event.type === 'charge.succeeded') {
     const charge = event.data.object
@@ -20,6 +21,8 @@ export async function POST(req: NextRequest) {
     const email = charge.billing_details.email
     const pricePaidInCents = charge.amount
     const order = await Order.findById(orderId).populate('user', 'email')
+  console.log('order------------------------------------------------------->>>>>>>')
+
   console.log('event order', order)
 
     if (order == null) {

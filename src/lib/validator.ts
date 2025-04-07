@@ -19,6 +19,14 @@ const Price = (num: string) => z.coerce
   (value) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(value)),
   `${num} must have exactly two decimal places (e.g., 30.99)`
 )
+export const ReviewFieldSchema = z.object({
+    product: MongoId,
+    user: MongoId,
+    isVerifiedPurchase: z.boolean(),
+    title: z.string().min(1, 'Title is required'),
+    comment: z.string().min(1, 'Comment is required'),
+    rating: z.coerce.number().int().min(1, 'Rating must be at least 1').max(5, 'Rating must be at most 5'),
+})
 
 export const ProductFieldSchema = z.object({
     name: z.string().min(4, 'Name must be at least 4 characters'),
@@ -48,7 +56,7 @@ export const ProductFieldSchema = z.object({
     ratingDistribution: z
         .array(z.object({ rating: z.number(), count: z.number() }))
         .max(5),
-    reviews: z.array(z.string()).default([]),
+    reviews: z.array(ReviewFieldSchema).default([]),
     numSales: z.coerce
         .number()
         .int()
@@ -158,3 +166,8 @@ export const OrderInputSchema = z.object({
     isPaid: z.boolean().default(false),
     paidAt: z.date().optional(),
 })
+
+export const UserNameSchema = z.object({
+    name: UserName
+})
+
