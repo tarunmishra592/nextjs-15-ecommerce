@@ -59,6 +59,7 @@ export default function AddToCart({
     </Button>
   ) : (
     <div className='w-full space-y-2'>
+      <div className='mt-5 quantity-box'>
       <Select
         value={quantity.toString()}
         onValueChange={(i) => setQuantity(Number(i))}
@@ -74,9 +75,11 @@ export default function AddToCart({
           ))}
         </SelectContent>
       </Select>
+      </div>
 
+      <div className='mt-5'>
       <Button
-        className='rounded-full w-full'
+        className='rounded-full w-full mb-5'
         type='button'
         onClick={async () => {
           try {
@@ -109,6 +112,7 @@ export default function AddToCart({
       >
         Buy Now
       </Button>
+      </div>
     </div>
   )
 }

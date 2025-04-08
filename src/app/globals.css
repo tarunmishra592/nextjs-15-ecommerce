@@ -132,3 +132,7 @@
     @apply p-3 hover:bg-muted hover:no-underline;
   }
 }
+
+.quantity-box button{
+  width: 100%;
+}

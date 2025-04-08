@@ -36,7 +36,7 @@ export default async function Sidebar({ categories }: {
                   <DrawerClose asChild>
                     <Link href='/sign-in'>
                       <span className='text-lg font-semibold'>
-                        Hello, sign in
+                        Hello, Sign In
                       </span>
                     </Link>
                   </DrawerClose>
