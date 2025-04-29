@@ -56,6 +56,6 @@ export const SENDER_EMAIL=process.env.RESEND_EMAIL || 'jackleelive1989@gmail.com
 export const SENDER_NAME = process.env.RESEND_NAME || 'Shopping'
 
 
-export const STRIPE_PUBLIC_KEY = 'pk_test_51R8hUxRuhl0OtJRIRmB1B6m7ZL7KNYAdGFWHJOUZLDvgoVWKURsKQFXYrs1m8GW8Ll37qC38C0exQjFWFQMTMhYj00D2zhrIwK'
-export const STRIPE_SECRET_KEY = 'sk_test_51R8hUxRuhl0OtJRIiynuL3WrJVFoJbDC2jdY0JIkAySoQ3Kjeb9TaS3PWaM7lxtqC4dnpTGRyjaE9VjhYb9HfkhV00tLbOIPyx'
-export const STRIPE_WEBHOOK_SECRET = 'whsec_FnkZKVVoDKEqGR6p7lvQiVJUgjcJY89G'
+export const STRIPE_PUBLIC_KEY = process.env.NEXT_STRIPE_PUBLIC_KEY
+export const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
+export const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET
